@@ -1,0 +1,4 @@
+[webservers]
+{% for droplet in infra.outputs.droplets.value %}
+{{droplet.name}} ansible_host={{droplet.ipv4_address}} ansible_user=root
+{% endfor %}

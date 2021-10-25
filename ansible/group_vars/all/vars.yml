@@ -1,0 +1,2 @@
+terraform_cloud_token: "{{ vault_terraform_cloud_token }}"
+do_token: "{{ vault_do_token }}"

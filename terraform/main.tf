@@ -75,6 +75,6 @@ resource "digitalocean_loadbalancer" "app" {
   droplet_ids = digitalocean_droplet.web.*.id
 }
 
-output "webservers" {
+output "droplets" {
   value = digitalocean_droplet.web
 }

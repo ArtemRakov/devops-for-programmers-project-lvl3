@@ -1,0 +1,17 @@
+---
+
+- name: Create terraform infrastructure (webservers, loadbalancer)
+  community.general.terraform:
+    project_path: "{{ terraform_dir }}"
+    variables:
+      do_token: "{{ do_token }}"
+    force_init: yes
+    state: present
+    backend_config:
+      token: "{{ terraform_cloud_token }}"
+  register: infra
+
+- name: Add hosts
+  template:
+    src: templates/hosts.j2
+    dest: hosts
