@@ -49,13 +49,13 @@ resource "digitalocean_loadbalancer" "app" {
         protocol = "http"
       },
       {
-        port = 443
+        port     = 443
         protocol = "https"
       }
     ]
 
     content {
-      entry_port = forwarding_rule.value["port"]
+      entry_port     = forwarding_rule.value["port"]
       entry_protocol = forwarding_rule.value["protocol"]
 
       target_port     = 80
@@ -72,7 +72,7 @@ resource "digitalocean_loadbalancer" "app" {
   }
 
   redirect_http_to_https = true
-  droplet_ids = digitalocean_droplet.web.*.id
+  droplet_ids            = digitalocean_droplet.web.*.id
 }
 
 output "droplets" {
