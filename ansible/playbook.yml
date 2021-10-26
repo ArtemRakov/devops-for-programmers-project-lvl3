@@ -1,6 +1,6 @@
 ---
 - name: Prepare webservers
-  hosts: all
+  hosts: webservers
   tasks:
     - name: Install packages
       ansible.builtin.apt:
