@@ -1,6 +1,7 @@
 install:
 	ansible-galaxy role install -r ansible/requirements.yml
 	ansible-galaxy collection install -r ansible/requirements.yml
+	make touch-vault-password-file
 
 setup-infra:
 	ansible-playbook -v --vault-password-file vault-password ansible/infra.yml
