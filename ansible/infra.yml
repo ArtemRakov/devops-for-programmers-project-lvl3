@@ -1,0 +1,10 @@
+---
+
+- name: Setup Infrastructure
+  tags: infra
+  hosts: localhost
+  connection: local
+  roles:
+    - name: infrastructure
+      vars:
+        terraform_dir: "{{ playbook_dir }}/../terraform"

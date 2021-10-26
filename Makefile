@@ -2,20 +2,11 @@ install:
 	ansible-galaxy role install -r ansible/requirements.yml
 	ansible-galaxy collection install -r ansible/requirements.yml
 
-init:
-	terraform -chdir=terraform init
-
-lint:
-	terraform fmt -check -diff terraform
-
-validate:
-	terraform -chdir=terraform validate
-
-apply:
-	terraform -chdir=terraform apply
-
 setup-infra:
-	ansible-playbook -v --vault-password-file vault-password --tags infra ansible/playbook.yml
+	ansible-playbook -v --vault-password-file vault-password ansible/infra.yml
+
+provision:
+	ansible-playbook -v -i ansible/hosts --vault-password-file vault-password ansible/playbook.yml
 
 deploy:
 	ansible-playbook -i ansible/hosts -v --vault-password-file vault-password --tags deploy ansible/playbook.yml

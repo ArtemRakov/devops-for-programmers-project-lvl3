@@ -1,10 +1,39 @@
 ---
+- name: Prepare webservers
+  hosts: all
+  tasks:
+    - name: Install packages
+      ansible.builtin.apt:
+        name: python3-pip
+        update_cache: yes
 
-- name: Setup Infrastructure
-  tags: infra
-  hosts: localhost
-  connection: local
-  roles:
-    - name: infrastructure
-      vars:
-        terraform_dir: "{{ playbook_dir }}/../terraform"
+    - name: Install Docker Module for Python
+      ansible.builtin.pip:
+        name: docker
+
+- name: Deploy application
+  hosts: all
+  tags: deploy
+
+  tasks:
+    - name: Run container
+      community.docker.docker_container:
+        name: devops-example-app
+        image: hexletcomponents/devops-example-app
+        published_ports:
+          - 80:5000
+        restart_policy: always
+        container_default_behavior: no_defaults
+        restart: yes
+        pull: yes
+        env:
+          SERVER_MESSAGE: '{{ ansible_default_ipv4.address }}'
+
+- name: Install datadog
+  hosts: webservers
+  tags: monitoring
+
+  tasks:
+    - name: Setup datadog
+      include_role:
+        name: datadog.datadog
