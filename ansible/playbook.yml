@@ -12,7 +12,7 @@
         name: docker
 
 - name: Deploy application
-  hosts: all
+  hosts: webservers
   tags: deploy
 
   tasks:
