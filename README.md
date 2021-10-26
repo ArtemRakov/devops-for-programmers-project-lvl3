@@ -3,8 +3,8 @@
 
 ### Commands
 
-```ssh
-  make install # install all dependencies and vault file for ansible
+```bash
+  make install # install all dependencies and creates vault file for ansible
   make setup-infra # will run terraform and save droplets to inventory
   make provision # will provision droplets
   make deploy # if you want just to deploy code
